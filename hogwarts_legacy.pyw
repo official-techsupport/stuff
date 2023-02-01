@@ -1,6 +1,5 @@
-from tkinter import Tk, Frame
+from tkinter import Tk
 
 root = Tk()
-frame = Frame(root)
-frame.winfo_toplevel().title("Hogwarts Legacy (Deluxe Edition)")
+root.winfo_toplevel().title("Hogwarts Legacy (Deluxe Edition)")
 root.mainloop()
