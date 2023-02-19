@@ -11,7 +11,7 @@ def eprint(*args, **kwargs):
     print(*args, file=sys.stderr, **kwargs)
 
 
-def main(script_name='Veiled Threats'):
+def main(script_name='Trust Issues in Alcatraz'):
     WORKDIR.mkdir(exist_ok=True)
     roles_json = WORKDIR / 'roles.json'
     if not roles_json.exists():
@@ -39,19 +39,21 @@ def main(script_name='Veiled Threats'):
 
     missing = []
     for role in src:
-        role_id = role['id'].replace('_', '')
+        if role['id'] == '_meta':
+            continue
+        role_id = role['id'].replace('_', '').replace('-', '')
         if not (image := MARSEY_MAPPING.get(role_id)):
             missing.append(role_id)
             continue
         role = roles[role_id]
         role['id'] = 'marsey' + role_id
-        role['image'] = image
+        role['image'] = 'https://rdrama.net/e/' + image
         role_lst.append(role)
 
     if missing:
         eprint('Missing role images:')
         for it in missing:
-            eprint(f"'{it}': 'https://rdrama.net/e/.webp',")
+            eprint(f"'{it}': '.webp',")
         return
 
     for name in PLAYERS:
@@ -69,63 +71,98 @@ def main(script_name='Veiled Threats'):
 
 
 PLAYERS = [
-    'aqouta',
-    'Platy',
-    'HeyMoon',
-    'Redactor0',
-    'd20diceman',
-    'Substantial',
-    'BurdensomeCount',
-    'official_techsupport',
-    'hbtz',
-    'DonGER',
-    'justcool393',
-    'carpathianflorist',
-    'drunkbinn',
+    "drunkbinn",
+    "byobombs",
+    "TracingWoodgrains",
+    "BurdensomeCount",
+    "idio3",
+    "Klenny",
+    "hbtz",
+    "carpathianflorist",
+    "official_techsupport",
+    "aqouta",
+    "Platy",
+    "Skeleton",
+    "justcool393",
+    "TeachPiece",
 ]
 
 
 MARSEY_MAPPING = {
-    'noble': 'https://rdrama.net/e/marseycosmopolitan.webp',
-    'clockmaker': 'https://rdrama.net/e/marseytime.webp',
-    'bountyhunter': 'https://rdrama.net/e/marseybountyhunter.webp',
-    'sailor': 'https://rdrama.net/e/marseysailor.webp',
-    'balloonist': 'https://rdrama.net/e/marseypinochet.webp',
-    'empath': 'https://rdrama.net/e/marseymeangirls.webp',
-    'innkeeper': 'https://rdrama.net/e/marseywinemom.webp',
-    'exorcist': 'https://rdrama.net/e/marseypope.webp',
-    'juggler': 'https://rdrama.net/e/marseypearlclutch2.webp',
-    'nightwatchman': 'https://rdrama.net/e/marseybongcop.webp',
-    'fool': 'https://rdrama.net/e/marseyclown2.webp',
-    'sage': 'https://rdrama.net/e/marseymonk.webp',
-    'cannibal': 'https://rdrama.net/e/marseyhannibal.webp',
-    'puzzlemaster': 'https://rdrama.net/e/marseythinkorino.webp',
-    'tinker': 'https://rdrama.net/e/marseythebuilder.webp',
-    'saint': 'https://rdrama.net/e/marseysaint2.webp',
-    'politician': 'https://rdrama.net/e/marseybiden.webp',
-    'godfather': 'https://rdrama.net/e/marseygodfather.webp',
-    'widow': 'https://rdrama.net/e/marseyspider.webp',
-    'devilsadvocate': 'https://rdrama.net/e/marseybaphomet.webp',
-    'cerenovus': 'https://rdrama.net/e/marseycommitted.webp',
-    'fanggu': 'https://rdrama.net/e/marseyghosthappy.webp',
-    'chambermaid': 'https://rdrama.net/e/marseymaid.webp',
-    'fortuneteller': 'https://rdrama.net/e/marseyfortuneteller.webp',
-    'snakecharmer': 'https://rdrama.net/e/marseyschizosnakeslove.webp',
-    'monk': 'https://rdrama.net/e/marseymonk.webp',
-    'lycanthrope': 'https://rdrama.net/e/marseywerewolf.webp',
-    'courtier': 'https://rdrama.net/e/marseychocolatemilk.webp',
-    'seamstress': 'https://rdrama.net/e/marseyplush.webp',
-    'pacifist': 'https://rdrama.net/e/marseyinnocent.webp',
-    'alchemist': 'https://rdrama.net/e/marseychimera.webp',
-    'mayor': 'https://rdrama.net/e/marseysoutherner.webp',
-    'recluse': 'https://rdrama.net/e/marseyhorseshoe.webp',
-    'drunk': 'https://rdrama.net/e/marseydrunk.webp',
-    'moonchild': 'https://rdrama.net/e/marseymooncricket.webp',
-    'poisoner': 'https://rdrama.net/e/marseycyanide.webp',
-    'witch': 'https://rdrama.net/e/marseywitch2.webp',
-    'scarletwoman': 'https://rdrama.net/e/marseyfans.webp',
-    'pukka': 'https://rdrama.net/e/marseysnek.webp',
-    'vigormortis': 'https://rdrama.net/e/marseyspookysmile.webp',
+    # townsfolk
+    'alchemist': 'marseychimera.webp',
+    'amnesiac': 'marseyconfused.webp',
+    'artist': 'marseypainter.webp',
+    'balloonist': 'marseypinochet.webp',
+    'bountyhunter': 'marseybountyhunter.webp',
+    'cannibal': 'marseyhannibal.webp',
+    'chambermaid': 'marseymaid.webp',
+    'clockmaker': 'marseytime.webp',
+    'courtier': 'marseychocolatemilk.webp',
+    'cultleader': 'marseykeffalsdance.webp',
+    'empath': 'marseymeangirls.webp',
+    'exorcist': 'marseypope.webp',
+    'fool': 'marseyclown2.webp',
+    'fortuneteller': 'marseyfortuneteller.webp',
+    'gambler': 'marseygambling.webp',
+    'gossip': 'marseygossip.webp',
+    'king': ' marseyking.webp',
+    'lycanthrope': 'marseywerewolf.webp',
+    'mathematician': 'marseychartgaussian.webp',
+    'mayor': 'marseysoutherner.webp',
+    'monk': 'marseymonk.webp',
+    'nightwatchman': 'marseybongcop.webp',
+    'noble': 'marseycosmopolitan.webp',
+    'oracle': 'marseymidsommardani.webp',
+    'pacifist': 'marseyinnocent.webp',
+    'philosopher': 'marseypipe.webp',
+    'preacher': 'marseypastor.webp',
+    'sailor': 'marseysailor.webp',
+    'innkeeper': 'marseywinemom.webp',
+    'juggler': 'marseypearlclutch2.webp',
+    'sage': 'marseymonk.webp',
+    'seamstress': 'marseyplush.webp',
+    'snakecharmer': 'marseyschizosnakeslove.webp',
+    # outsider
+    'drunk': 'marseydrunk.webp',
+    'klutz': 'marseyretard2.webp',
+    'moonchild': 'marseymooncricket.webp',
+    'politician': 'marseybiden.webp',
+    'puzzlemaster': 'marseythinkorino.webp',
+    'recluse': 'marseyhorseshoe.webp',
+    'saint': 'marseysaint2.webp',
+    'sweetheart': 'marseybow.webp',
+    'tinker': 'marseythebuilder.webp',
+    # minion
+    'assassin': 'marseyninja.webp',
+    'boomdandy': 'marseyakbar.webp',
+    'cerenovus': 'marseycommitted.webp',
+    'devilsadvocate': 'marseybaphomet.webp',
+    'eviltwin': 'marseynoyou.webp',
+    'godfather': 'marseygodfather.webp',
+    'legion': 'marseylegion.webp',
+    'marionette': 'marseybait.webp',
+    'mezepheles': 'marseynotesglow.webp',
+    'poisoner': 'marseycyanide.webp',
+    'psychopath': 'marseypsycho.webp',
+    'scarletwoman': 'marseyfans.webp',
+    'spy': 'marseysnekglow.webp',
+    'widow': 'marseyspider.webp',
+    'witch': 'marseywitch2.webp',
+    # demon
+    'alhadikhia': 'marseybinladen.webp',
+    'fanggu': 'marseyghosthappy.webp',
+    'imp': 'marseydevil.webp',
+    'pukka': 'marseysnek.webp',
+    'shabaloth': 'marseychonker2.webp',
+    'vigormortis': 'marseyspookysmile.webp',
+    'vortox': 'marseygiygas.webp',
+    # traveler
+    'barista': 'marseycoffeerecursive.webp',
+    'judge': 'marseyjudge.webp',
+    # fabled
+    'hellslibrarian': 'marseyreading.webp',
+    'revolutionary': 'marseyrevolution.webp',
 }
 
 

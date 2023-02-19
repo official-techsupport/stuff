@@ -1,4 +1,4 @@
 from tkinter import Tk
 root = Tk()
-root.title("Hogwarts Legacy (Deluxe Edition)")
+root.title("Hogwarts Legacy: Digital Deluxe Edition")
 root.mainloop()
