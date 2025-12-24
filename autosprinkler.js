@@ -2,7 +2,7 @@
 // @name         Autosprinkler
 // @namespace    http://tampermonkey.net/
 // @version      0.1
-// @description  I'm spriiiiinkling
+// @description  I'm spriiiinkling
 // @author       official_techsupport
 // @match        https://discord.com/channels/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=discord.com
