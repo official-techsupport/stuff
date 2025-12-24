@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Autosprinkler
 // @namespace    http://tampermonkey.net/
-// @version      0.1
+// @version      0.2
 // @description  I'm spriiiinkling
 // @author       official_techsupport
 // @match        https://discord.com/channels/*
@@ -25,13 +25,21 @@
         const button = droplets[droplets.length - 1].parentElement.parentElement.parentElement;
         const comment = button.parentElement.parentElement.parentElement.parentElement;
         const text = comment.innerText;
-        const canWater = text.includes('Ready to be watered!');
+        const canWater = text.includes('\nReady to be watered!\n');
         console.log(JSON.stringify({wasWaterable, canWater}));
         if (canWater && !wasWaterable) {
             console.log('Watering!');
             button.click();
         }
         wasWaterable = canWater;
+
+        const clickies = document.querySelectorAll('a[role=button]');
+        for (const it of clickies) {
+            if (it.innerText == 'Dismiss message') {
+                console.log('Dismissing: ' + it.parentElement.parentElement.innerText.split(/\n/)[0]);
+                it.click();
+            }
+        }
     }
 
     f();
