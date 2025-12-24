@@ -25,7 +25,7 @@
         const button = droplets[droplets.length - 1].parentElement.parentElement.parentElement;
         const comment = button.parentElement.parentElement.parentElement.parentElement;
         const text = comment.innerText;
-        const canWater = text.includes('\nReady to be watered!\n');
+        const canWater = text.includes('Ready to be watered!');
         console.log(JSON.stringify({wasWaterable, canWater}));
         if (canWater && !wasWaterable) {
             console.log('Watering!');
