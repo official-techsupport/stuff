@@ -1,47 +1,19 @@
-butti = """
-Discount
-disismyaccount
-Harpooner
-harpooner_
-sunshiney
-sunshiney
+n1 = """
 diddy+
 goblinbeans
-Red_Shill
-red_shill
-matty [matty]
-skwiiid
-ATrain Derailed
-atrainderailed
-Tyrian
-tyrianred
-baastard (trump's boywife)
-anotheruser_
-"""
-
-train = """
 Harpooner
 harpooner_
-ATrain Derailed
-atrainderailed
-Discount
-disismyaccount
-Techi (Shia)
-official_techsupport
-sunshiney
-sunshiney
-McCoxmaul (G127 LVP)
-mccoxmaul
+matty [matty]
+skwiiid
+"""
+
+n2 = """
 matty [matty]
 skwiiid
 butti tryin 2 make a change 🫤
 buttigieg2024
-diddy+
-goblinbeans
-Tyrian
-tyrianred
-Demy Goonjesh Coomar
-demysted
+sunshiney
+sunshiney
 """
 
 #############
@@ -73,7 +45,7 @@ def parse(s):
     return frozenset(lst[1::2])
 
 
-votes = (parse(butti) | parse(train)) & everyone
+votes = (parse(n1) | parse(n1)) & everyone
 print(f"Voted: {len(votes)}")
 print("\n".join(sorted(votes)))
 print("\nNot voted:")
